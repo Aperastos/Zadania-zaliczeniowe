@@ -1,4 +1,4 @@
-package shop.order.pages;
+package shop.configuration.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,34 +7,28 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
 
+    private final WebDriver driver;
 
-        private final WebDriver driver;
+    @FindBy(name = "email")
+    private WebElement loginInput;
 
-        @FindBy(className = "user-info")
-        private WebElement signIn;
-        @FindBy(name = "email")
-        private WebElement loginInput;
-        @FindBy(name = "password")
-        private WebElement passwordInput;
-        @FindBy(id = "submit-login")
-        private WebElement signInBtn;
-        @FindBy(id="_desktop_logo")
-        private WebElement myStoreBtn;
+    @FindBy(name = "password")
+    private WebElement passwordInput;
 
-        public LoginPage(WebDriver driver) {
-            this.driver = driver;
-            PageFactory.initElements(driver, this);
-        }
+    @FindBy(id = "submit-login")
+    private WebElement signInBtn;
 
-        public MainPage loginAs(String email, String password) {
-            loginInput.clear();
-            loginInput.sendKeys(email);
-            passwordInput.clear();
-            passwordInput.sendKeys(password);
-            signInBtn.click();
-            myStoreBtn.click();
+    public LoginPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
 
-            return new MainPage(driver);
-        }
+    public MainPage loginAs(String login, String password) {
+        loginInput.clear();
+        loginInput.sendKeys(login);
+        passwordInput.clear();
+        passwordInput.sendKeys(password);
+        signInBtn.click();
+        return new MainPage(driver);
+    }
 }
-
